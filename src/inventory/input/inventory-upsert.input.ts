@@ -11,6 +11,18 @@ export class PropertiesInput {
 }
 
 @InputType()
+export class LocalizationInput {
+  @Field()
+  x: number;
+
+  @Field()
+  y: number;
+
+  @Field()
+  z: number;
+}
+
+@InputType()
 export class InventoryUpsertInput {
   @Field({ nullable: true })
   @IsOptional()
@@ -23,4 +35,7 @@ export class InventoryUpsertInput {
 
   @Field({ nullable: true })
   comments?: string;
+
+  @Field(() => LocalizationInput, { nullable: true })
+  localization: LocalizationInput;
 }

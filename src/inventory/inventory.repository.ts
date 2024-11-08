@@ -27,6 +27,7 @@ export class InventoryRepository {
         properties: input.properties
           ? this.mergeObjects(item.properties, input.properties)
           : item.properties,
+        localization: input.localization ?? item.localization,
         id,
       });
     }
@@ -46,6 +47,7 @@ export class InventoryRepository {
     return this.updateInventory({
       comments: item.comments,
       properties: updatedProperties,
+      localization: item.localization,
       id,
     });
   }

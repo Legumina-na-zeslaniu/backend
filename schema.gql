@@ -49,11 +49,18 @@ input InventoryUpsertInput {
   id: String
   properties: [PropertiesInput!]
   comments: String
+  localization: LocalizationInput
 }
 
 input PropertiesInput {
   field: String!
   value: String!
+}
+
+input LocalizationInput {
+  x: Float!
+  y: Float!
+  z: Float!
 }
 
 input InventoryDeletePropertiesInput {

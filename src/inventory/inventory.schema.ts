@@ -17,6 +17,18 @@ interface IProperties {
   value: string;
 }
 
+@Schema()
+class Localization {
+  @Prop({ type: Number })
+  x: number;
+
+  @Prop({ type: Number })
+  y: number;
+
+  @Prop({ type: Number })
+  z: number;
+}
+
 @Schema({ timestamps: true })
 export class Inventory {
   _id!: Types.ObjectId;
@@ -26,6 +38,9 @@ export class Inventory {
 
   @Prop({ type: String })
   comments: string;
+
+  @Prop({ type: Localization })
+  localization: Localization;
 }
 
 export const InventorySchema = SchemaFactory.createForClass(Inventory);
