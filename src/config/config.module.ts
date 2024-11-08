@@ -4,6 +4,7 @@ import { ConfigModule as NestConfigModule } from '@nestjs/config';
 import { DatabaseConfig } from './database.config';
 import { validate } from './env.variables';
 import { ServerConfig } from './server.config';
+import { OpenAiConfig } from './openai.config';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { ServerConfig } from './server.config';
       validate,
     }),
   ],
-  providers: [ServerConfig, DatabaseConfig],
-  exports: [ServerConfig, DatabaseConfig],
+  providers: [ServerConfig, DatabaseConfig, OpenAiConfig],
+  exports: [ServerConfig, DatabaseConfig, OpenAiConfig],
 })
 export class ConfigModule {}

@@ -11,7 +11,7 @@ async function bootstrap() {
   const serverConfig = new ServerConfig(config);
 
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors();
   app.use(graphqlUploadExpress({ maxFileSize: 100_000_000, maxFiles: 1 }));
 
   registerEnums();

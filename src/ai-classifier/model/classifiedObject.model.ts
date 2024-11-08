@@ -4,7 +4,4 @@ import { Field, ObjectType } from '@nestjs/graphql';
 export class ClassifiedObject {
   @Field()
   name!: string;
-
-  @Field()
-  confidence!: number;
 }

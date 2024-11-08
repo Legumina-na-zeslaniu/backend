@@ -44,6 +44,9 @@ export class EnvironmentVariables {
   @IsBoolean()
   @Transform(({ value }) => value === 'true' || value === 1 || value === '1')
   ENABLE_INTROSPECTION = true;
+
+  @IsString()
+  OPEN_AI_API_KEY: string;
 }
 
 export function validate(config: Record<string, unknown>) {
