@@ -1,0 +1,37 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ClassifiedObject {
+  name: String!
+  confidence: Float!
+}
+
+type ClassifiedProperties {
+  name: String
+  location: String
+  manufacturer: String
+  itemModel: String
+  serialNumber: String
+  equipmentType: String
+  size: String
+  age: String
+  materialType: String
+  condition: String
+}
+
+"""Upload files"""
+scalar Upload
+
+type Query {
+  hello: String!
+}
+
+type Mutation {
+  classifyObject(input: UploadPhotoInput!): ClassifiedObject!
+  classifyProperties(input: UploadPhotoInput!): ClassifiedProperties!
+}
+
+input UploadPhotoInput {
+  file: Upload!
+}
