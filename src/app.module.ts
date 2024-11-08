@@ -6,6 +6,7 @@ import { ServerConfig } from './config/server.config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DatabaseConfig } from './config/database.config';
 import { AiClassifierModule } from './ai-classifier/ai-classifier.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AiClassifierModule } from './ai-classifier/ai-classifier.module';
       useExisting: DatabaseConfig,
     }),
     AiClassifierModule,
+    InventoryModule,
   ],
 })
 export class AppModule {}

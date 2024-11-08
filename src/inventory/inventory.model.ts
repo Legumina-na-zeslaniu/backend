@@ -1,49 +1,14 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { InventoryDocument } from './inventory.schema';
+import { Properties } from 'src/ai-classifier/model/classifiedObject.model';
 
 @ObjectType()
 export class InventoryModel {
   @Field()
-  id!: string;
+  id: string;
 
-  @Field()
-  name!: string;
+  @Field({ nullable: true })
+  comments?: string;
 
-  @Field()
-  location!: string;
-
-  @Field()
-  manufacturer!: string;
-
-  @Field()
-  itemModel!: string;
-
-  @Field()
-  serialNumber!: string;
-
-  @Field()
-  equipmentType!: string;
-
-  @Field()
-  size!: string;
-
-  @Field()
-  age!: string;
-
-  @Field()
-  materialType!: string;
-
-  @Field()
-  condition!: string;
-
-  @Field()
-  notes!: string;
-
-  constructor(input: InventoryDocument | InventoryModel) {
-    Object.assign(this, {
-      ...((input as any)._doc
-        ? (input as InventoryDocument).toObject({ virtuals: true })
-        : input),
-    });
-  }
+  @Field(() => [Properties])
+  properties: Properties[];
 }

@@ -4,6 +4,8 @@ import OpenAI from 'openai';
 import { OpenAiConfig } from 'src/config/openai.config';
 import { Base64Encode } from 'base64-stream';
 import { ReadStream } from 'graphql-upload-ts';
+import { z } from 'zod';
+import { zodResponseFormat } from 'openai/helpers/zod';
 
 @Injectable()
 export class AiClassifierService {
@@ -12,7 +14,7 @@ export class AiClassifierService {
     this.openAi = new OpenAI({ apiKey: openAiConfig.getApiKey() });
   }
 
-  async getBase64(stream: ReadStream): Promise<string> {
+  private async getBase64(stream: ReadStream): Promise<string> {
     return new Promise((resolve, reject) => {
       let result = '';
       stream
@@ -29,19 +31,25 @@ export class AiClassifierService {
 
   async classifyObject(input: UploadPhotoInput) {
     const prompt =
-      'What is the object in the image? Answer with just the name of the object.';
-    return this.callOpenAiApi(input, prompt);
+      'Your role is to identify object in the image and return all important properties of the object in context of keeping inventory. For example, if the object is a car, you should return properties like manufacturer, model, year, color, age, condition etc. Only provide data which you are certain about. Do not guess or provide data which is not visible in the image. If you dont have answer do not provide any data. For sure do not add location or any other data which is not related to the object.';
+
+    const resp = await this.callOpenAiApi(input, prompt);
+    console.log(resp);
+    return resp;
   }
 
-  async classifyProperties(input: UploadPhotoInput) {
-    const prompt = 'What are the properties of the object in the image?'; //todo write prompt based on InventoryDocument
-    return this.callOpenAiApi(input, prompt);
-  }
-
-  async callOpenAiApi(input: UploadPhotoInput, prompt: string) {
+  private async callOpenAiApi(input: UploadPhotoInput, prompt: string) {
     const file = await input.file;
     const encodedImage = await this.getBase64(file.createReadStream());
-    const response = await this.openAi.chat.completions.create({
+    const schema = z.object({
+      properties: z.array(
+        z.object({
+          field: z.string(),
+          value: z.union([z.string(), z.number()]),
+        }),
+      ),
+    });
+    const response = await this.openAi.beta.chat.completions.parse({
       model: 'gpt-4o-mini',
       messages: [
         {
@@ -57,7 +65,8 @@ export class AiClassifierService {
           ],
         },
       ],
+      response_format: zodResponseFormat(schema, 'response'),
     });
-    return { name: response.choices[0].message.content };
+    return response.choices[0].message.parsed;
   }
 }

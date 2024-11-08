@@ -1,23 +1,25 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { InventoryModel } from './inventory.model';
-import { InventoryCreateInput } from './input/inventory-create.input';
-import { InventoryUpdateInput } from './input/inventory-update.input';
 import { InventoryInput } from './input/inventory.input';
 import { InventoryService } from './inventory.service';
 import { Success } from 'src/commons/response/success';
+import { InventoryUpsertInput } from './input/inventory-upsert.input';
+import { InventoryDeletePropertiesInput } from './input/inventory-delete-properties.input';
 
 @Resolver()
 export class InventoryResolver {
   constructor(private readonly service: InventoryService) {}
 
   @Mutation(() => InventoryModel)
-  async createInventory(@Args('input') input: InventoryCreateInput) {
-    return this.service.createInventory(input);
+  async upsertInventory(@Args('input') input: InventoryUpsertInput) {
+    return this.service.upsertInventory(input);
   }
 
   @Mutation(() => InventoryModel)
-  async updateInventory(@Args('input') input: InventoryUpdateInput) {
-    return this.service.updateInventory(input);
+  async deleteInventoryProperties(
+    @Args('input') input: InventoryDeletePropertiesInput,
+  ) {
+    return this.service.deleteProperties(input);
   }
 
   @Query(() => InventoryModel)

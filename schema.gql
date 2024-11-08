@@ -3,20 +3,22 @@
 # ------------------------------------------------------
 
 type ClassifiedObject {
-  name: String!
+  properties: [Properties!]!
 }
 
-type ClassifiedProperties {
-  name: String
-  location: String
-  manufacturer: String
-  itemModel: String
-  serialNumber: String
-  equipmentType: String
-  size: String
-  age: String
-  materialType: String
-  condition: String
+type Properties {
+  field: String!
+  value: String!
+}
+
+type InventoryModel {
+  id: String!
+  comments: String
+  properties: [Properties!]!
+}
+
+type Success {
+  success: Boolean!
 }
 
 """Upload files"""
@@ -24,13 +26,37 @@ scalar Upload
 
 type Query {
   hello: String!
+  getInventory(input: InventoryInput!): InventoryModel!
+}
+
+input InventoryInput {
+  id: String!
 }
 
 type Mutation {
   classifyObject(input: UploadPhotoInput!): ClassifiedObject!
-  classifyProperties(input: UploadPhotoInput!): ClassifiedProperties!
+  upsertInventory(input: InventoryUpsertInput!): InventoryModel!
+  deleteInventoryProperties(input: InventoryDeletePropertiesInput!): InventoryModel!
+  getAllInventory: [InventoryModel!]!
+  deleteInventory(input: InventoryInput!): Success!
 }
 
 input UploadPhotoInput {
   file: Upload!
+}
+
+input InventoryUpsertInput {
+  id: String
+  properties: [PropertiesInput!]
+  comments: String
+}
+
+input PropertiesInput {
+  field: String!
+  value: String!
+}
+
+input InventoryDeletePropertiesInput {
+  id: String!
+  properties: [String!]!
 }

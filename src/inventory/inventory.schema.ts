@@ -3,43 +3,29 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type InventoryDocument = HydratedDocument<Inventory>;
 
+@Schema()
+class Properties {
+  @Prop({ type: String })
+  field: string;
+
+  @Prop({ type: String })
+  value: string;
+}
+
+interface IProperties {
+  field: string;
+  value: string;
+}
+
 @Schema({ timestamps: true })
 export class Inventory {
   _id!: Types.ObjectId;
 
-  @Prop({ type: String })
-  name: string; //ai/user
+  @Prop({ type: [Properties] })
+  properties: IProperties[]; //ai
 
   @Prop({ type: String })
-  location: string; //user, think about type
-
-  @Prop({ type: String })
-  manufacturer: string; //ai/user
-
-  @Prop({ type: String })
-  itemModel: string; //ai/user
-
-  @Prop({ type: String })
-  serialNumber: string; //ai/user
-
-  //some kind of enum?
-  @Prop({ type: String })
-  equipmentType: string; //user/ai
-
-  @Prop({ type: String })
-  size: string; //ai/user
-
-  @Prop({ type: String })
-  age: string; //ai/user
-
-  @Prop({ type: String })
-  materialType: string; //user
-
-  @Prop({ type: String })
-  condition: string; //user
-
-  @Prop({ type: String })
-  notes: string; //user
+  comments: string;
 }
 
 export const InventorySchema = SchemaFactory.createForClass(Inventory);
