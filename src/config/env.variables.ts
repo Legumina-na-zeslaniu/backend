@@ -63,6 +63,9 @@ export class EnvironmentVariables {
 
   @IsString()
   MINIO_BUCKET: 'junction';
+
+  @IsString()
+  MINIO_PUBLIC_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {

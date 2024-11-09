@@ -26,4 +26,8 @@ export class MinioConfig {
   getBucket(): string {
     return this.config.get<string>('MINIO_BUCKET');
   }
+
+  getPublicUrl(): string {
+    return this.config.get<string>('MINIO_PUBLIC_URL');
+  }
 }

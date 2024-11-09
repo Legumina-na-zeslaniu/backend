@@ -31,7 +31,7 @@ export class InventoryService {
         const ext = syncFile.filename.split('.').pop();
         const path = `${id}/${uuidv4()}.${ext}`;
         await this.mediaService.uploadFile(syncFile.createReadStream(), path);
-        return `https://${this.minioConfig.getHost()}/${this.minioConfig.getBucket()}/${path}`;
+        return `https://${this.minioConfig.getPublicUrl()}/${this.minioConfig.getBucket()}/${path}`;
       }),
     );
   }
