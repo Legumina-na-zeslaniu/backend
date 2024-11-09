@@ -15,6 +15,7 @@ type InventoryModel {
   id: String!
   comments: String
   properties: [Properties!]!
+  files: [String!]
 }
 
 type Success {
@@ -50,6 +51,7 @@ input InventoryUpsertInput {
   properties: [PropertiesInput!]
   comments: String
   localization: LocalizationInput
+  files: [Upload!]
 }
 
 input PropertiesInput {

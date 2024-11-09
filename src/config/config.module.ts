@@ -5,6 +5,7 @@ import { DatabaseConfig } from './database.config';
 import { validate } from './env.variables';
 import { ServerConfig } from './server.config';
 import { OpenAiConfig } from './openai.config';
+import { MinioConfig } from './minio.config';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { OpenAiConfig } from './openai.config';
       validate,
     }),
   ],
-  providers: [ServerConfig, DatabaseConfig, OpenAiConfig],
-  exports: [ServerConfig, DatabaseConfig, OpenAiConfig],
+  providers: [ServerConfig, DatabaseConfig, OpenAiConfig, MinioConfig],
+  exports: [ServerConfig, DatabaseConfig, OpenAiConfig, MinioConfig],
 })
 export class ConfigModule {}

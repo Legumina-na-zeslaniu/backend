@@ -11,4 +11,7 @@ export class InventoryModel {
 
   @Field(() => [Properties])
   properties: Properties[];
+
+  @Field(() => [String], { nullable: true })
+  files?: string[];
 }

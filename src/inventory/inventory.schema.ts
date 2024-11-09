@@ -41,6 +41,9 @@ export class Inventory {
 
   @Prop({ type: Localization })
   localization: Localization;
+
+  @Prop({ type: [String] })
+  files: string[];
 }
 
 export const InventorySchema = SchemaFactory.createForClass(Inventory);

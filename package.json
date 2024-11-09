@@ -33,10 +33,13 @@
     "class-validator": "^0.14.1",
     "graphql": "^16.9.0",
     "graphql-upload-ts": "^2.1.2",
+    "minio": "^8.0.2",
     "mongoose": "^8.8.0",
+    "nestjs-minio": "^2.6.2",
     "openai": "^4.71.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
+    "uuid": "^11.0.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -47,6 +47,22 @@ export class EnvironmentVariables {
 
   @IsString()
   OPEN_AI_API_KEY: string;
+
+  @IsString()
+  MINIO_HOST: string;
+
+  @IsString()
+  MINIO_ACCESS_KEY: string;
+
+  @IsString()
+  MINIO_SECRET_KEY: string;
+
+  @IsInt()
+  @Transform(({ value }) => +value)
+  MINIO_PORT: 9000;
+
+  @IsString()
+  MINIO_BUCKET: 'junction';
 }
 
 export function validate(config: Record<string, unknown>) {
