@@ -2,6 +2,18 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Properties } from 'src/ai-classifier/model/classifiedObject.model';
 
 @ObjectType()
+export class LocalizationModel {
+  @Field()
+  x: number;
+
+  @Field()
+  y: number;
+
+  @Field()
+  z: number;
+}
+
+@ObjectType()
 export class InventoryModel {
   @Field()
   id: string;
@@ -17,4 +29,7 @@ export class InventoryModel {
 
   @Field({ nullable: true })
   buildingId?: string;
+
+  @Field(() => LocalizationModel, { nullable: true })
+  localization?: LocalizationModel;
 }
