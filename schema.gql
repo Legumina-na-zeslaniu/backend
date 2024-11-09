@@ -11,15 +11,29 @@ type Properties {
   value: String!
 }
 
+type LocalizationModel {
+  x: Float!
+  y: Float!
+  z: Float!
+}
+
 type InventoryModel {
   id: String!
   comments: String
   properties: [Properties!]!
   files: [String!]
+  buildingId: String
+  localization: LocalizationModel
 }
 
 type Success {
   success: Boolean!
+}
+
+type IfcModel {
+  file: String!
+  id: String!
+  name: String!
 }
 
 """Upload files"""
@@ -29,9 +43,15 @@ type Query {
   hello: String!
   getInventory(input: InventoryInput!): InventoryModel!
   getAllInventory: [InventoryModel!]!
+  getIfcModel(input: IfcInput!): IfcModel!
+  getIfcModels: [IfcModel!]!
 }
 
 input InventoryInput {
+  id: String!
+}
+
+input IfcInput {
   id: String!
 }
 
@@ -40,6 +60,7 @@ type Mutation {
   upsertInventory(input: InventoryUpsertInput!): InventoryModel!
   deleteInventoryProperties(input: InventoryDeletePropertiesInput!): InventoryModel!
   deleteInventory(input: InventoryInput!): Success!
+  upsertIfcModel(input: UpsertIfcModelInput!): IfcModel!
 }
 
 input UploadPhotoInput {
@@ -69,4 +90,10 @@ input LocalizationInput {
 input InventoryDeletePropertiesInput {
   id: String!
   properties: [String!]!
+}
+
+input UpsertIfcModelInput {
+  file: Upload
+  name: String
+  id: String
 }

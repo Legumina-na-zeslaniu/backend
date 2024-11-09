@@ -8,6 +8,7 @@ import { DatabaseConfig } from './config/database.config';
 import { AiClassifierModule } from './ai-classifier/ai-classifier.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { IfcModule } from './ifc/ifc.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     }),
     AiClassifierModule,
     InventoryModule,
+    IfcModule,
   ],
 })
 export class AppModule {}
