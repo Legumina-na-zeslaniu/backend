@@ -27,7 +27,7 @@ export class InventoryResolver {
     return this.service.getInventory(input.id);
   }
 
-  @Mutation(() => [InventoryModel])
+  @Query(() => [InventoryModel])
   async getAllInventory() {
     return this.service.getAllInventory();
   }

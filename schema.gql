@@ -27,6 +27,7 @@ scalar Upload
 type Query {
   hello: String!
   getInventory(input: InventoryInput!): InventoryModel!
+  getAllInventory: [InventoryModel!]!
 }
 
 input InventoryInput {
@@ -37,7 +38,6 @@ type Mutation {
   classifyObject(input: UploadPhotoInput!): ClassifiedObject!
   upsertInventory(input: InventoryUpsertInput!): InventoryModel!
   deleteInventoryProperties(input: InventoryDeletePropertiesInput!): InventoryModel!
-  getAllInventory: [InventoryModel!]!
   deleteInventory(input: InventoryInput!): Success!
 }
 

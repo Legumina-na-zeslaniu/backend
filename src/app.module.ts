@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DatabaseConfig } from './config/database.config';
 import { AiClassifierModule } from './ai-classifier/ai-classifier.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
@@ -17,7 +18,9 @@ import { InventoryModule } from './inventory/inventory.module';
       useFactory: (serverConfig: ServerConfig) => ({
         autoSchemaFile: 'schema.gql',
         introspection: serverConfig.getEnableIntrospection(),
-        playground: serverConfig.getEnablePlayground(),
+        playground: false,
+
+        plugins: [ApolloServerPluginLandingPageLocalDefault()],
       }),
       inject: [ServerConfig],
     }),
