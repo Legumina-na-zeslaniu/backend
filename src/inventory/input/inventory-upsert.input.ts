@@ -35,14 +35,18 @@ export class InventoryUpsertInput {
   properties: PropertiesInput[];
 
   @Field({ nullable: true })
+  @IsOptional()
   comments?: string;
 
   @Field(() => LocalizationInput, { nullable: true })
+  @IsOptional()
   localization?: LocalizationInput;
 
-  @Field()
-  buildingId: string;
+  @Field({ nullable: true })
+  @IsOptional()
+  buildingId?: string;
 
   @Field(() => [Upload], { nullable: true })
+  @IsOptional()
   files?: Upload[];
 }

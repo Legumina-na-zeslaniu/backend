@@ -51,6 +51,7 @@ input InventoryUpsertInput {
   properties: [PropertiesInput!]
   comments: String
   localization: LocalizationInput
+  buildingId: String
   files: [Upload!]
 }
 
