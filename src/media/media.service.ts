@@ -9,7 +9,7 @@ export class MediaService {
     this.minioClient = new Minio.Client({
       endPoint: this.minioConfig.getHost(),
       port: this.minioConfig.getMinioPort(),
-      useSSL: true,
+      useSSL: this.minioConfig.getHost() === 'minio' ? false : true,
       accessKey: this.minioConfig.getAccessKey(),
       secretKey: this.minioConfig.getSecretKey(),
     });
