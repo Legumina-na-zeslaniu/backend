@@ -29,6 +29,7 @@ export class InventoryRepository {
           : item.properties,
         localization: input.localization ?? item.localization,
         files: input.files ?? item.files,
+        buildingId: input.buildingId ?? item.buildingId,
         id,
       });
     }

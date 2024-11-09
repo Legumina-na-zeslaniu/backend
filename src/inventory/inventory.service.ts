@@ -42,6 +42,7 @@ export class InventoryService {
       comments: input.comments,
       properties: input.properties,
       localization: input.localization,
+      buildingId: input.buildingId,
       files: undefined,
     };
     const item = await this.repository.upsertInventory(serialized, input.id);

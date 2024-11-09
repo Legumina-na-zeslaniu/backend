@@ -38,7 +38,10 @@ export class InventoryUpsertInput {
   comments?: string;
 
   @Field(() => LocalizationInput, { nullable: true })
-  localization: LocalizationInput;
+  localization?: LocalizationInput;
+
+  @Field()
+  buildingId: string;
 
   @Field(() => [Upload], { nullable: true })
   files?: Upload[];

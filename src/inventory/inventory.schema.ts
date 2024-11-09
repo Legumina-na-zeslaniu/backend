@@ -33,6 +33,9 @@ class Localization {
 export class Inventory {
   _id!: Types.ObjectId;
 
+  @Prop({ type: String })
+  buildingId: string;
+
   @Prop({ type: [Properties] })
   properties: IProperties[]; //ai
 
