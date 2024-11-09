@@ -31,7 +31,7 @@ export class AiClassifierService {
 
   async classifyObject(input: UploadPhotoInput) {
     const prompt =
-      'Your role is to identify object in the image and return all important properties of the object in context of keeping inventory. For example, if the object is a car, you should return properties like manufacturer, model, year, color, age, condition etc. Only provide data which you are certain about. Do not guess or provide data which is not visible in the image. If you dont have answer do not provide any data. For sure do not add location or any other data which is not related to the object.';
+      'Your role is to identify object in the image and return all important properties of the object in context of keeping inventory. For example, if the object is a car, you should return properties like manufacturer, model, year, color, age, condition etc. Only provide data which you are certain about. Do not guess or provide data which is not visible in the image. If you dont have answer do not provide any data. For sure do not add location or any other data which is not related to the object. ALWAYS ADD TYPE AND NAME OF THE OBJECT.';
 
     const resp = await this.callOpenAiApi(input, prompt);
     console.log(resp);
